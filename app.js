@@ -20,11 +20,16 @@ connection.connect((err) => {
   console.log("Connected to MySQL!");
 });
 
-const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
-  host: dbConfig.host,
-  dialect: "mysql",
-  logging: false,
-});
+const sequelize = new Sequelize(
+  dbConfig.database,
+  dbConfig.user,
+  dbConfig.password,
+  {
+    host: dbConfig.host,
+    dialect: "mysql",
+    logging: false,
+  },
+);
 
 const User = UserModel(sequelize, DataTypes);
 
@@ -36,9 +41,23 @@ async function initializeDatabase() {
     await sequelize.sync({ alter: true });
     console.log("Database & tables created!");
   } catch (error) {
-    console.error("Database initialization failed:", error.message);
+    console.error("Database initialization failed:", error);
     process.exit(1);
   }
 }
 
-initializeDatabase();
+async function main() {
+  await initializeDatabase();
+
+  try {
+    await User.create({ name: "Rohan", email: "rohan@example.com" });
+    console.log("Sample user created");
+  } catch (error) {
+    console.error("Failed to create user:", error);
+  }
+}
+
+main().catch((error) => {
+  console.error("Startup failed:", error);
+  process.exit(1);
+});
