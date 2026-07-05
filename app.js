@@ -49,12 +49,12 @@ async function initializeDatabase() {
 async function main() {
   await initializeDatabase();
 
-  try {
-    await User.create({ name: "Rohan", email: "rohan@example.com" });
-    console.log("Sample user created");
-  } catch (error) {
-    console.error("Failed to create user:", error);
-  }
+  // try {
+  //   await User.create({ name: "Rohan", email: "rohan@example.com" });
+  //   console.log("Sample user created");
+  // } catch (error) {
+  //   console.error("Failed to create user:", error);
+  // }
 }
 
 main().catch((error) => {
