@@ -1,3 +1,5 @@
+const { DataTypes } = require("sequelize");
+
 module.exports = (sequelize) => {
   const AvailableSlot = sequelize.define("AvailableSlot", {
     id: {

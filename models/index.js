@@ -1,22 +1,23 @@
-const { Sequelize } = require("sequelize");
-const sequelize = require("../config/database");
-
+// This file is used to initialize and export all models with relationships
 // Import models
-const User = require("./User")(sequelize);
-const Teacher = require("./Teacher")(sequelize);
-const AvailableSlot = require("./AvailableSlot")(sequelize);
+const UserModel = require("./user");
+const TeacherModel = require("./teacher");
+const AvailableSlotModel = require("./availableSlot");
 
-// Define relationships
-User.hasOne(Teacher, { foreignKey: "userId" });
-Teacher.belongsTo(User, { foreignKey: "userId" });
+// Initialize models (call this function from app.js after creating sequelize instance)
+function initializeModels(sequelize) {
+  const User = UserModel(sequelize);
+  const Teacher = TeacherModel(sequelize);
+  const AvailableSlot = AvailableSlotModel(sequelize);
 
-Teacher.hasMany(AvailableSlot, { foreignKey: "teacherId" });
-AvailableSlot.belongsTo(Teacher, { foreignKey: "teacherId" });
+  // Define relationships
+  User.hasOne(Teacher, { foreignKey: "userId" });
+  Teacher.belongsTo(User, { foreignKey: "userId" });
 
-// Export models + sequelize instance
-module.exports = {
-  sequelize,
-  User,
-  Teacher,
-  AvailableSlot,
-};
+  Teacher.hasMany(AvailableSlot, { foreignKey: "teacherId" });
+  AvailableSlot.belongsTo(Teacher, { foreignKey: "teacherId" });
+
+  return { User, Teacher, AvailableSlot };
+}
+
+module.exports = { initializeModels };

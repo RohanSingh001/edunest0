@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 const { Sequelize, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
-const UserModel = require("./models/user");
+const { initializeModels } = require("./models/index");
 
 const dbConfig = {
   host: process.env.DB_HOST || "localhost",
@@ -32,7 +32,8 @@ const sequelize = new Sequelize(
   },
 );
 
-const User = UserModel(sequelize);
+// Initialize all models with relationships
+const { User, Teacher, AvailableSlot } = initializeModels(sequelize);
 
 async function initializeDatabase() {
   try {
