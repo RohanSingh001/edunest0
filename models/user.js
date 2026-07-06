@@ -1,30 +1,30 @@
 const { DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 module.exports = (sequelize) => {
-  return sequelize.define(
-    "User",
-    {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-      },
+  const User = sequelize.define("User", {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-    {
-      tableName: "users",
-      freezeTableName: true,
-      timestamps: true,
-    },
-  );
+    name: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, unique: true, allowNull: false },
+    password: { type: DataTypes.STRING, allowNull: false },
+    role: { type: DataTypes.ENUM("student", "teacher", "admin"), defaultValue: "student" },
+  });
+
+  // Hash password before saving
+  User.beforeCreate(async (user) => {
+    user.password = await bcrypt.hash(user.password, 10);
+  });
+
+  // Compare password
+  User.prototype.validPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+  };
+
+  return User;
 };
 
 // User.create({ name: "Rohan", email: "rohan@example.com" });

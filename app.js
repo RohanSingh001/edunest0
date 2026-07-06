@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const { Sequelize, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
 const UserModel = require("./models/user");
 
 const dbConfig = {
@@ -31,7 +32,7 @@ const sequelize = new Sequelize(
   },
 );
 
-const User = UserModel(sequelize, DataTypes);
+const User = UserModel(sequelize);
 
 async function initializeDatabase() {
   try {
@@ -48,14 +49,31 @@ async function initializeDatabase() {
 
 async function main() {
   await initializeDatabase();
-
-  // try {
-  //   await User.create({ name: "Rohan", email: "rohan@example.com" });
-  //   console.log("Sample user created");
-  // } catch (error) {
-  //   console.error("Failed to create user:", error);
-  // }
 }
+
+// async function seedUsers() {
+//   const users = [
+//     {
+//       id: "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+//       name: "Alice Johnson",
+//       email: "alice.teacher@example.com",
+//       password: await bcrypt.hash("AlicePass123", 10),
+//       role: "teacher",
+//     },
+//     {
+//       id: "b2c3d4e5-f6a7-8901-bcde-2345678901bc",
+//       name: "Bob Smith",
+//       email: "bob.student@example.com",
+//       password: await bcrypt.hash("BobPass456", 10),
+//       role: "student",
+//     },
+//   ];
+
+//   await User.bulkCreate(users);
+//   console.log("Users seeded successfully!");
+// }
+
+// seedUsers();
 
 main().catch((error) => {
   console.error("Startup failed:", error);
