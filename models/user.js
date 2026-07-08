@@ -11,7 +11,10 @@ module.exports = (sequelize) => {
     name: { type: DataTypes.STRING, allowNull: false },
     email: { type: DataTypes.STRING, unique: true, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
-    role: { type: DataTypes.ENUM("student", "teacher", "admin"), defaultValue: "student" },
+    role: {
+      type: DataTypes.ENUM("student", "teacher", "admin", "parent"),
+      defaultValue: "student",
+    },
   });
 
   // Hash password before saving

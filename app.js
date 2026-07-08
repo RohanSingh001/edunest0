@@ -33,7 +33,7 @@ const sequelize = new Sequelize(
 );
 
 // Initialize all models with relationships
-const { User, Teacher, AvailableSlot } = initializeModels(sequelize);
+const { User, Teacher, AvailableSlot, Student } = initializeModels(sequelize);
 
 async function initializeDatabase() {
   try {
