@@ -33,7 +33,8 @@ const sequelize = new Sequelize(
 );
 
 // Initialize all models with relationships
-const { User, Teacher, AvailableSlot, Student } = initializeModels(sequelize);
+const { User, Teacher, AvailableSlot, Student, Homework, HomeworkSubmission } =
+  initializeModels(sequelize);
 
 async function initializeDatabase() {
   try {
@@ -50,6 +51,9 @@ async function initializeDatabase() {
 
 async function main() {
   await initializeDatabase();
+  // Seed data after database and tables are initialized
+  // await seedHomework();
+  await seedHomeworkSubmissions();
 }
 
 // Add user in database
@@ -155,6 +159,58 @@ async function main() {
 // }
 
 // seedAvailableSlots();
+
+// add homework in database
+// async function seedHomework() {
+//   const homeworks = [
+//     {
+//       teacherId: "2014d9b7-6086-400f-8dc5-50bf19290927", // Alice Johnson teacherId
+//       title: "Math Practice Worksheet",
+//       description: "Complete exercises 1–10 from Chapter 3 (Fractions).",
+//       subject: "Mathematics",
+//       grade: "5th",
+//       section: "A",
+//       dueDate: new Date("2026-07-15"),
+//       status: "assigned",
+//     },
+//     {
+//       teacherId: "dad773fd-3abc-4bfa-b9ac-b019aa9f44b3", // Bob teacherId
+//       title: "English Essay",
+//       description: "Write a 300-word essay on 'My Favorite Season'.",
+//       subject: "English",
+//       grade: "8th",
+//       section: "B",
+//       dueDate: new Date("2026-07-20"),
+//       status: "assigned",
+//     },
+//   ];
+
+//   await Homework.bulkCreate(homeworks);
+//   console.log("Homework assignments seeded successfully!");
+// }
+
+// add homework submission in database
+async function seedHomeworkSubmissions() {
+  const submissions = [
+    {
+      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
+      studentId: "6c46f3c0-ea16-49ff-9149-bf13de880a67", // Bob Smith studentId
+      submissionDate: new Date("2026-07-14"),
+      fileUrl: "https://school-system.com/uploads/homework/bob_math.pdf",
+      grade: "A",
+    },
+    {
+      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
+      studentId: "260aeb57-bd41-4a64-88f2-6dcdcd89c588", // Mary Doe studentId
+      submissionDate: new Date("2026-07-15"),
+      fileUrl: "https://school-system.com/uploads/homework/mary_math.pdf",
+      grade: "B+",
+    },
+  ];
+
+  await HomeworkSubmission.bulkCreate(submissions);
+  console.log("Homework submissions seeded successfully!");
+}
 
 main().catch((error) => {
   console.error("Startup failed:", error);

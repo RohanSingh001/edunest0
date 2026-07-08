@@ -4,6 +4,8 @@ const UserModel = require("./user");
 const TeacherModel = require("./teacher");
 const AvailableSlotModel = require("./availableSlot");
 const StudentModel = require("./student");
+const HomeworkSubmissionModel = require("./homeworkSubmission");
+const HomeworkModel = require("./homework");
 
 // Initialize models (call this function from app.js after creating sequelize instance)
 function initializeModels(sequelize) {
@@ -11,6 +13,8 @@ function initializeModels(sequelize) {
   const Teacher = TeacherModel(sequelize);
   const AvailableSlot = AvailableSlotModel(sequelize);
   const Student = StudentModel(sequelize);
+  const Homework = HomeworkModel(sequelize);
+  const HomeworkSubmission = HomeworkSubmissionModel(sequelize);
 
   // Define relationships
   User.hasOne(Teacher, { foreignKey: "userId" });
@@ -22,7 +26,20 @@ function initializeModels(sequelize) {
   User.hasOne(Student, { foreignKey: "userId" });
   Student.belongsTo(User, { foreignKey: "userId" });
 
-  return { User, Teacher, AvailableSlot, Student };
+  Homework.hasMany(HomeworkSubmission, { foreignKey: "homeworkId" });
+  HomeworkSubmission.belongsTo(Homework, { foreignKey: "homeworkId" });
+
+  Student.hasMany(HomeworkSubmission, { foreignKey: "studentId" });
+  HomeworkSubmission.belongsTo(Student, { foreignKey: "studentId" });
+
+  return {
+    User,
+    Teacher,
+    AvailableSlot,
+    Student,
+    Homework,
+    HomeworkSubmission,
+  };
 }
 
 module.exports = { initializeModels };
