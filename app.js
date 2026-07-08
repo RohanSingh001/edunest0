@@ -52,29 +52,27 @@ async function main() {
   await initializeDatabase();
 }
 
-// async function seedUsers() {
-//   const users = [
-//     {
-//       id: "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
-//       name: "Alice Johnson",
-//       email: "alice.teacher@example.com",
-//       password: await bcrypt.hash("AlicePass123", 10),
-//       role: "teacher",
-//     },
-//     {
-//       id: "b2c3d4e5-f6a7-8901-bcde-2345678901bc",
-//       name: "Bob Smith",
-//       email: "bob.student@example.com",
-//       password: await bcrypt.hash("BobPass456", 10),
-//       role: "student",
-//     },
-//   ];
+async function seedUsers() {
+  const users = [
+    {
+      name: "Blu Josen",
+      email: "blue.teacher@example.com",
+      password: await bcrypt.hash("BluPass123", 10),
+      role: "teacher",
+    },
+    {
+      name: "don Smith",
+      email: "don.student@example.com",
+      password: await bcrypt.hash("DonPass789", 10),
+      role: "student",
+    },
+  ];
 
-//   await User.bulkCreate(users);
-//   console.log("Users seeded successfully!");
-// }
+  await User.bulkCreate(users);
+  console.log("Users seeded successfully!");
+}
 
-// seedUsers();
+seedUsers();
 
 main().catch((error) => {
   console.error("Startup failed:", error);
