@@ -131,6 +131,31 @@ async function main() {
 
 // seedStudentAndTeacher();
 
+// Add available slots in database
+// async function seedAvailableSlots() {
+//   const slots = [
+//     {
+//       teacherId: "2014d9b7-6086-400f-8dc5-50bf19290927", // Teacher Alice Johnson
+//       day: "Monday",
+//       startTime: "09:00",
+//       endTime: "09:30",
+//       isBooked: true,
+//     },
+//     {
+//       teacherId: "2014d9b7-6086-400f-8dc5-50bf19290927", // same teacher
+//       day: "Monday",
+//       startTime: "10:00",
+//       endTime: "10:30",
+//       isBooked: false,
+//     },
+//   ];
+
+//   await AvailableSlot.bulkCreate(slots);
+//   console.log("Available slots seeded successfully!");
+// }
+
+// seedAvailableSlots();
+
 main().catch((error) => {
   console.error("Startup failed:", error);
   process.exit(1);
