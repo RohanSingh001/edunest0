@@ -188,8 +188,90 @@
 
 // seedMeetings();
 
-// *************** This is for seed all users
+// add meeting participants in database
 
+// async function seedmeetingParticipants() {
+//   const participants = [
+//     {
+//       meetingId: "591459aa-833a-4e59-aa4d-035c5112b0f3", // Parent-Teacher Meeting UUID
+//       userId: "4b9a149f-b475-4c69-9287-003d907d8a32", // Bob Smith (student)
+//       roleInMeeting: "student",
+//     },
+//     {
+//       meetingId: "fb8ef8e4-2f34-4c31-beb4-6defc884c54a",
+//       userId: "0683f8b1-8f6e-44e7-a55b-f98fa42d3045", // Parent user
+//       roleInMeeting: "parent",
+//     },
+//   ];
+
+//   await MeetingParticipant.bulkCreate(participants);
+//   console.log("Meeting participants seeded successfully!");
+// }
+
+// seedmeetingParticipants();
+
+// add fees in database
+// async function seedFee() {
+//   const fees = [
+//     {
+//       studentId: "260aeb57-bd41-4a64-88f2-6dcdcd89c588", // Bob Smith
+//       academicYear: "2026-2027",
+//       term: "Term1",
+//       totalAmount: 15000,
+//       amountPaid: 5000,
+//       dueDate: new Date("2026-07-31"),
+//       status: "partial",
+//     },
+//     {
+//       studentId: "6c46f3c0-ea16-49ff-9149-bf13de880a67", // Mary Doe
+//       academicYear: "2026-2027",
+//       term: "Annual",
+//       totalAmount: 30000,
+//       amountPaid: 30000,
+//       dueDate: new Date("2026-07-31"),
+//       status: "paid",
+//     },
+//   ];
+
+//   await Fee.bulkCreate(fees);
+//   console.log("Fee data seeded successfully!");
+// }
+
+// seedFee();
+
+// add fee payments in database
+// async function seedFeePayments() {
+//   const feePayments = [
+//     {
+//       feeId: "7bca75ca-99e6-4260-b09f-02bc12443909", // Fee record for Bob Smith
+//       paymentDate: new Date("2026-07-10"),
+//       amount: 3000,
+//       method: "cash",
+//       receiptNumber: "RCPT001",
+//     },
+//     {
+//       feeId: "7bca75ca-99e6-4260-b09f-02bc12443909", // same fee record
+//       paymentDate: new Date("2026-07-15"),
+//       amount: 2000,
+//       method: "online",
+//       receiptNumber: "RCPT002",
+//     },
+//     {
+//       feeId: "a12e67df-6f1e-4234-aa89-0673a89f8543", // Fee record for Mary Doe
+//       paymentDate: new Date("2026-07-12"),
+//       amount: 30000,
+//       method: "bank_transfer",
+//       receiptNumber: "RCPT003",
+//     },
+//   ];
+
+//   await FeePayment.bulkCreate(feePayments);
+//   console.log("Fee payments seeded successfully!");
+// }
+
+// seedFeePayments();
+
+// *************** This is for seed all users
 
 // Combined seeding: create users first, then teacher/student and homework
 // async function seedAll() {
