@@ -6,6 +6,8 @@ const AvailableSlotModel = require("./availableSlot");
 const StudentModel = require("./student");
 const HomeworkSubmissionModel = require("./homeworkSubmission");
 const HomeworkModel = require("./homework");
+const MeetingModel = require("./meeting");
+const MeetingParticipantModel = require("./meetingParticipant");
 
 // Initialize models (call this function from app.js after creating sequelize instance)
 function initializeModels(sequelize) {
@@ -15,7 +17,8 @@ function initializeModels(sequelize) {
   const Student = StudentModel(sequelize);
   const Homework = HomeworkModel(sequelize);
   const HomeworkSubmission = HomeworkSubmissionModel(sequelize);
-
+  const Meeting = MeetingModel(sequelize);
+  const MeetingParticipant = MeetingParticipantModel(sequelize);
   // Define relationships
   User.hasOne(Teacher, { foreignKey: "userId" });
   Teacher.belongsTo(User, { foreignKey: "userId" });
@@ -32,6 +35,12 @@ function initializeModels(sequelize) {
   Student.hasMany(HomeworkSubmission, { foreignKey: "studentId" });
   HomeworkSubmission.belongsTo(Student, { foreignKey: "studentId" });
 
+  Meeting.hasMany(MeetingParticipant, { foreignKey: "meetingId" });
+  MeetingParticipant.belongsTo(Meeting, { foreignKey: "meetingId" });
+
+  User.hasMany(MeetingParticipant, { foreignKey: "userId" });
+  MeetingParticipant.belongsTo(User, { foreignKey: "userId" });
+
   return {
     User,
     Teacher,
@@ -39,6 +48,8 @@ function initializeModels(sequelize) {
     Student,
     Homework,
     HomeworkSubmission,
+    Meeting,
+    MeetingParticipant,
   };
 }
 
