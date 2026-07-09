@@ -157,9 +157,38 @@
 // await seedHomework();
 // await seedHomeworkSubmissions();
 
+// Add meetings in database
+// async function seedMeetings() {
+//   const meetings = [
+//     {
+//       organizerId: "8997b32c-d8d2-4ca2-9c43-a039d29c84d7", // Teacher Alice Johnson
+//       title: "Parent-Teacher Meeting",
+//       description: "Discuss Bob Smith's academic progress and behavior.",
+//       date: new Date("2026-07-18"),
+//       startTime: "10:00",
+//       endTime: "10:30",
+//       type: "parent-teacher",
+//       status: "scheduled",
+//     },
+//     {
+//       organizerId: "cd11c7da-fdde-4c46-a558-9ab1decb80d7", // Teacher Bob
+//       title: "Student Guidance Session",
+//       description: "Provide career counseling for Mary Doe.",
+//       date: new Date("2026-07-19"),
+//       startTime: "11:00",
+//       endTime: "11:45",
+//       type: "teacher-student",
+//       status: "scheduled",
+//     },
+//   ];
 
+//   await Meeting.bulkCreate(meetings);
+//   console.log("Meetings seeded successfully!");
+// }
 
-// This is for seed all users
+// seedMeetings();
+
+// *************** This is for seed all users
 
 
 // Combined seeding: create users first, then teacher/student and homework

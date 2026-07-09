@@ -33,8 +33,16 @@ const sequelize = new Sequelize(
 );
 
 // Initialize all models with relationships
-const { User, Teacher, AvailableSlot, Student, Homework, HomeworkSubmission } =
-  initializeModels(sequelize);
+const {
+  User,
+  Teacher,
+  AvailableSlot,
+  Student,
+  Homework,
+  HomeworkSubmission,
+  Meeting,
+  MeetingParticipant,
+} = initializeModels(sequelize);
 
 async function initializeDatabase() {
   try {
@@ -52,6 +60,26 @@ async function initializeDatabase() {
 async function main() {
   await initializeDatabase();
 }
+
+async function seedmeetingParticipants() {
+  const participants = [
+    {
+      meetingId: "591459aa-833a-4e59-aa4d-035c5112b0f3", // Parent-Teacher Meeting UUID
+      userId: "4b9a149f-b475-4c69-9287-003d907d8a32", // Bob Smith (student)
+      roleInMeeting: "student",
+    },
+    {
+      meetingId: "fb8ef8e4-2f34-4c31-beb4-6defc884c54a",
+      userId: "0683f8b1-8f6e-44e7-a55b-f98fa42d3045", // Parent user
+      roleInMeeting: "parent",
+    },
+  ];
+
+  await MeetingParticipant.bulkCreate(participants);
+  console.log("Meeting participants seeded successfully!");
+}
+
+seedmeetingParticipants();
 
 main().catch((error) => {
   console.error("Startup failed:", error);

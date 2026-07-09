@@ -1,35 +1,43 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const MeetingParticipant = sequelize.define("MeetingParticipant", {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    meetingId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: "meetings",
-        key: "id",
+  const MeetingParticipant = sequelize.define(
+    "MeetingParticipant",
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
       },
-      onDelete: "CASCADE",
-    },
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: "users",
-        key: "id",
+      meetingId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: "meetings",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
-      onDelete: "CASCADE",
+      userId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+      },
+      roleInMeeting: {
+        type: DataTypes.ENUM("teacher", "student", "parent", "admin"),
+        allowNull: false,
+      },
     },
-    roleInMeeting: {
-      type: DataTypes.ENUM("teacher", "student", "parent", "admin"),
-      allowNull: false,
+    {
+      tableName: "meeting_participants",
+      freezeTableName: true,
+      timestamps: true,
     },
-  });
+  );
 
   return MeetingParticipant;
 };
