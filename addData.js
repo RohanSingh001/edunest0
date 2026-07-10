@@ -271,6 +271,48 @@
 
 // seedFeePayments();
 
+// add parent in database
+// async function seedParent() {
+//   const parents = [
+//     {
+//       userId: "04df08fc-d05f-48f9-8e20-e81157ad8ff9", // Parent User
+//       occupation: "Engineer",
+//       contactNumber: "9876543210",
+//       address: "123 Green Street, Ghaziabad",
+//     },
+//     {
+//       userId: "850ed02b-7a6e-45b3-ba92-b2357f669eff", // Another Parent User
+//       occupation: "Teacher",
+//       contactNumber: "9123456789",
+//       address: "456 Blue Avenue, Ghaziabad",
+//     },
+//   ];
+
+//   await Parent.bulkCreate(parents);
+//   console.log("Parent data seeded successfully!");
+// }
+
+// seedParent();
+
+// add parent-student relationships in database
+// async function seedparentStudent() {
+//   const parentStudentLinks = [
+//     {
+//       parentId: "30ff6b91-061f-42cb-bff8-0402808e473c",
+//       studentId: "260aeb57-bd41-4a64-88f2-6dcdcd89c588", // Bob Smith
+//     },
+//     {
+//       parentId: "79e79d76-6cb9-4bd3-8b5b-823c8e9aa690",
+//       studentId: "6c46f3c0-ea16-49ff-9149-bf13de880a67", // Mary Doe
+//     },
+//   ];
+
+//   await ParentStudent.bulkCreate(parentStudentLinks);
+//   console.log("Parent-Student relationships seeded successfully!");
+// }
+
+// seedparentStudent();
+
 // *************** This is for seed all users
 
 // Combined seeding: create users first, then teacher/student and homework
