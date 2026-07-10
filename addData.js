@@ -313,6 +313,33 @@
 
 // seedparentStudent();
 
+// add admin in database
+// async function seedadmin() {
+//   const admins = [
+//     {
+//       userId: "d933effb-a6cc-4720-b698-ae55ac8f1529", // Principal User
+//       employeeId: "ADM001",
+//       designation: "Principal",
+//       contactNumber: "9876543210",
+//       address: "123 School Road, Ghaziabad",
+//       joiningDate: new Date("2020-06-01"),
+//     },
+//     {
+//       userId: "fe129343-875e-4e47-b5a2-ad3c4bea97bc", // Vice Principal User
+//       employeeId: "ADM002",
+//       designation: "Vice Principal",
+//       contactNumber: "9123456789",
+//       address: "456 Education Lane, Ghaziabad",
+//       joiningDate: new Date("2021-08-15"),
+//     },
+//   ];
+
+//   await Admin.bulkCreate(admins, { ignoreDuplicates: true });
+//   console.log("Admin records seeded successfully!");
+// }
+
+//  seedadmin();
+
 // *************** This is for seed all users
 
 // Combined seeding: create users first, then teacher/student and homework

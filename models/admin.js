@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Student = sequelize.define(
-    "Student",
+  const Admin = sequelize.define(
+    "Admin",
     {
       id: {
         type: DataTypes.UUID,
@@ -12,29 +12,41 @@ module.exports = (sequelize) => {
       userId: {
         type: DataTypes.UUID,
         allowNull: false,
+        unique: true,
         references: {
-          model: "users",
+          model: "users", // table name from your User model
           key: "id",
         },
         onDelete: "CASCADE",
       },
-      rollNumber: { type: DataTypes.STRING, unique: true, allowNull: false },
-      grade: { type: DataTypes.STRING, allowNull: false }, // e.g. "5th", "10th"
-      section: { type: DataTypes.STRING, allowNull: true }, // e.g. "A", "B"
-      admissionDate: { type: DataTypes.DATE, allowNull: false },
-      guardianName: { type: DataTypes.STRING, allowNull: false },
-      guardianContact: { type: DataTypes.STRING, allowNull: false },
-      address: { type: DataTypes.STRING, allowNull: true },
-      status: {
-        type: DataTypes.ENUM("active", "graduated", "transferred", "suspended"),
-        defaultValue: "active",
+      employeeId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      designation: {
+        type: DataTypes.STRING, // e.g. "Principal", "Vice Principal"
+        allowNull: false,
+      },
+      contactNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      joiningDate: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
     },
     {
-      tableName: "students",
+      tableName: "admins",
       freezeTableName: true,
       timestamps: true,
     },
   );
-  return Student;
+
+  return Admin;
 };

@@ -12,6 +12,7 @@ const FeeModel = require("./fee");
 const FeePaymentModel = require("./feePayment");
 const ParentModel = require("./parent");
 const ParentStudentModel = require("./parentStudent");
+const AdminModel = require("./admin");
 
 // Initialize models (call this function from app.js after creating sequelize instance)
 function initializeModels(sequelize) {
@@ -27,6 +28,7 @@ function initializeModels(sequelize) {
   const FeePayment = FeePaymentModel(sequelize);
   const Parent = ParentModel(sequelize);
   const ParentStudent = ParentStudentModel(sequelize);
+  const Admin = AdminModel(sequelize);
 
   // Define relationships
   User.hasOne(Teacher, { foreignKey: "userId" });
@@ -70,6 +72,10 @@ function initializeModels(sequelize) {
     foreignKey: "studentId",
   });
 
+  // User ↔ Admin
+  User.hasOne(Admin, { foreignKey: "userId" });
+  Admin.belongsTo(User, { foreignKey: "userId" });
+
   return {
     User,
     Teacher,
@@ -83,6 +89,7 @@ function initializeModels(sequelize) {
     FeePayment,
     Parent,
     ParentStudent,
+    Admin,
   };
 }
 

@@ -46,6 +46,7 @@ const {
   FeePayment,
   Parent,
   ParentStudent,
+  Admin,
 } = initializeModels(sequelize);
 
 async function initializeDatabase() {
