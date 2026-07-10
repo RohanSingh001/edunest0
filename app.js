@@ -44,6 +44,8 @@ const {
   MeetingParticipant,
   Fee,
   FeePayment,
+  Parent,
+  ParentStudent,
 } = initializeModels(sequelize);
 
 async function initializeDatabase() {

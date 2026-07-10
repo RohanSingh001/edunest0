@@ -10,6 +10,8 @@ const MeetingModel = require("./meeting");
 const MeetingParticipantModel = require("./meetingParticipant");
 const FeeModel = require("./fee");
 const FeePaymentModel = require("./feePayment");
+const ParentModel = require("./parent");
+const ParentStudentModel = require("./parentStudent");
 
 // Initialize models (call this function from app.js after creating sequelize instance)
 function initializeModels(sequelize) {
@@ -23,6 +25,8 @@ function initializeModels(sequelize) {
   const MeetingParticipant = MeetingParticipantModel(sequelize);
   const Fee = FeeModel(sequelize);
   const FeePayment = FeePaymentModel(sequelize);
+  const Parent = ParentModel(sequelize);
+  const ParentStudent = ParentStudentModel(sequelize);
 
   // Define relationships
   User.hasOne(Teacher, { foreignKey: "userId" });
@@ -52,6 +56,20 @@ function initializeModels(sequelize) {
   Fee.hasMany(FeePayment, { foreignKey: "feeId" });
   FeePayment.belongsTo(Fee, { foreignKey: "feeId" });
 
+  // User ↔ Parent
+  User.hasOne(Parent, { foreignKey: "userId" });
+  Parent.belongsTo(User, { foreignKey: "userId" });
+
+  // Parent ↔ Student (many-to-many, since a parent can have multiple children)
+  Parent.belongsToMany(Student, {
+    through: "ParentStudent",
+    foreignKey: "parentId",
+  });
+  Student.belongsToMany(Parent, {
+    through: "ParentStudent",
+    foreignKey: "studentId",
+  });
+
   return {
     User,
     Teacher,
@@ -63,6 +81,8 @@ function initializeModels(sequelize) {
     MeetingParticipant,
     Fee,
     FeePayment,
+    Parent,
+    ParentStudent,
   };
 }
 
