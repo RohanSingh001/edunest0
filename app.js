@@ -66,29 +66,36 @@ async function main() {
   await initializeDatabase();
 }
 
-async function seedHomeworkSubmissions() {
-  const submissions = [
+async function seedFeePayments() {
+  const feePayments = [
     {
-      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
-      studentId: "0069f941-187a-488d-bcfc-d6b2cc08c97a", // Bob Smith studentId
-      submissionDate: new Date("2026-07-14"),
-      fileUrl: "https://school-system.com/uploads/homework/bob_math.pdf",
-      grade: "A",
+      feeId: "37aa3f82-12e4-4a8e-8e90-a6c5efcfd412", // Fee record for Bob Smith
+      paymentDate: new Date("2026-07-10"),
+      amount: 3000,
+      method: "cash",
+      receiptNumber: "RCPT001",
     },
     {
-      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
-      studentId: "651aff43-b793-4813-a80c-7621ee4d84da", // Mary Doe studentId
-      submissionDate: new Date("2026-07-15"),
-      fileUrl: "https://school-system.com/uploads/homework/mary_math.pdf",
-      grade: "B+",
+      feeId: "37aa3f82-12e4-4a8e-8e90-a6c5efcfd412", // same fee record
+      paymentDate: new Date("2026-07-15"),
+      amount: 2000,
+      method: "online",
+      receiptNumber: "RCPT002",
+    },
+    {
+      feeId: "a13d98c0-5d2f-46d5-8305-4a8f103f3c86", // Fee record for Mary Doe
+      paymentDate: new Date("2026-07-12"),
+      amount: 30000,
+      method: "bank_transfer",
+      receiptNumber: "RCPT003",
     },
   ];
 
-  await HomeworkSubmission.bulkCreate(submissions);
-  console.log("Homework submissions seeded successfully!");
+  await FeePayment.bulkCreate(feePayments);
+  console.log("Fee payments seeded successfully!");
 }
 
-seedHomeworkSubmissions();
+seedFeePayments();
 
 main().catch((error) => {
   console.error("Startup failed:", error);
