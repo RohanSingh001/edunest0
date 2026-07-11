@@ -66,6 +66,30 @@ async function main() {
   await initializeDatabase();
 }
 
+async function seedHomeworkSubmissions() {
+  const submissions = [
+    {
+      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
+      studentId: "0069f941-187a-488d-bcfc-d6b2cc08c97a", // Bob Smith studentId
+      submissionDate: new Date("2026-07-14"),
+      fileUrl: "https://school-system.com/uploads/homework/bob_math.pdf",
+      grade: "A",
+    },
+    {
+      homeworkId: "6d9fcb3e-6a54-4902-b76c-e82483efb4a6", // Math homework UUID
+      studentId: "651aff43-b793-4813-a80c-7621ee4d84da", // Mary Doe studentId
+      submissionDate: new Date("2026-07-15"),
+      fileUrl: "https://school-system.com/uploads/homework/mary_math.pdf",
+      grade: "B+",
+    },
+  ];
+
+  await HomeworkSubmission.bulkCreate(submissions);
+  console.log("Homework submissions seeded successfully!");
+}
+
+seedHomeworkSubmissions();
+
 main().catch((error) => {
   console.error("Startup failed:", error);
   process.exit(1);

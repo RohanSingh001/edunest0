@@ -22,8 +22,6 @@ module.exports = (sequelize) => {
       grade: { type: DataTypes.STRING, allowNull: false }, // e.g. "5th", "10th"
       section: { type: DataTypes.STRING, allowNull: true }, // e.g. "A", "B"
       admissionDate: { type: DataTypes.DATE, allowNull: false },
-      guardianName: { type: DataTypes.STRING, allowNull: false },
-      guardianContact: { type: DataTypes.STRING, allowNull: false },
       address: { type: DataTypes.STRING, allowNull: true },
       status: {
         type: DataTypes.ENUM("active", "graduated", "transferred", "suspended"),

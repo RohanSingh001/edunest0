@@ -43,11 +43,15 @@ function initializeModels(sequelize) {
   Homework.hasMany(HomeworkSubmission, { foreignKey: "homeworkId" });
   HomeworkSubmission.belongsTo(Homework, { foreignKey: "homeworkId" });
 
+  Teacher.hasMany(Homework, { foreignKey: "teacherId" });
+  Homework.belongsTo(Teacher, { foreignKey: "teacherId" });
+
   Student.hasMany(HomeworkSubmission, { foreignKey: "studentId" });
   HomeworkSubmission.belongsTo(Student, { foreignKey: "studentId" });
 
   Meeting.hasMany(MeetingParticipant, { foreignKey: "meetingId" });
   MeetingParticipant.belongsTo(Meeting, { foreignKey: "meetingId" });
+  Meeting.belongsTo(User, { foreignKey: "organizerId" });
 
   User.hasMany(MeetingParticipant, { foreignKey: "userId" });
   MeetingParticipant.belongsTo(User, { foreignKey: "userId" });
